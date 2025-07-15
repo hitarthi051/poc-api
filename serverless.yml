@@ -14,8 +14,8 @@ provider:
   environment:
     NODE_ENV: development
   apiGateway:
-    restApiId: n6kcchy3df
-    restApiRootResourceId: mraesrsn9j
+    restApiId: mraesrsn9j
+    restApiRootResourceId: n6kcchy3df
 
 functions:
   api:
