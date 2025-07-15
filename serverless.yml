@@ -3,7 +3,7 @@ service: poc-serverless-typescript
 plugins:
 #  - serverless-offline
 #  - serverless login
-  # - serverless-esbuild
+  - serverless-esbuild
 
 provider:
   name: aws
