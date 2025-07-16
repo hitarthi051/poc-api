@@ -1,4 +1,4 @@
-service: poc-serverless-typescript
+service: poc-serverless-typescript-2
 
 plugins:
 #  - serverless-offline
@@ -10,7 +10,7 @@ provider:
   runtime: nodejs20.x
   timeout: 30
   region: eu-west-1
-  stackName: poc-api
+  stackName: poc-api-2
   environment:
     NODE_ENV: development
   apiGateway:
