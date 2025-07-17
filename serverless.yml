@@ -10,7 +10,8 @@ provider:
   runtime: nodejs20.x
   timeout: 30
   region: eu-west-1
-  stackName: poc-api
+  versionFunctions: true
+  stage: blue
   environment:
     NODE_ENV: development
   apiGateway:
