@@ -23,7 +23,7 @@ functions:
       - http:
           path: /get-all-users
           method: get
-          integration: aws_proxy
+          integration: lambda
           request:
             uri:
               Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
@@ -42,7 +42,7 @@ functions:
       - http:
           path: /get-tasks-by-username
           method: post
-          integration: aws_proxy
+          integration: lambda
           request:
             uri:
               Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
@@ -61,7 +61,7 @@ functions:
       - http:
           path: /add-user
           method: post
-          integration: aws_proxy
+          integration: lambda
           request:
             uri:
               Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
@@ -80,7 +80,7 @@ functions:
       - http:
           path: /add-task
           method: post
-          integration: aws_proxy
+          integration: lambda
           request:
             uri:
               Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
@@ -99,7 +99,7 @@ functions:
       - http:
           path: /get-single-task
           method: post
-          integration: aws_proxy
+          integration: lambda
           request:
             uri:
               Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
@@ -118,7 +118,7 @@ functions:
       - http:
           path: /get-single-user
           method: post
-          integration: aws_proxy
+          integration: lambda
           request:
             uri:
               Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
@@ -137,7 +137,7 @@ functions:
       - http:
           path: /get-all-tasks
           method: get
-          integration: aws_proxy
+          integration: lambda
           request:
             uri:
               Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
@@ -156,7 +156,7 @@ functions:
       - http:
           path: /update-user/{id}
           method: put
-          integration: aws_proxy
+          integration: lambda
           request:
             parameters:
               paths:
@@ -178,7 +178,7 @@ functions:
       - http:
           path: /update-task/{id}
           method: put
-          integration: aws_proxy
+          integration: lambda
           request:
             parameters:
               paths:
@@ -200,7 +200,7 @@ functions:
       - http:
           path: /delete-task/{id}
           method: delete
-          integration: aws_proxy
+          integration: lambda
           request:
             parameters:
               paths:
@@ -222,7 +222,7 @@ functions:
       - http:
           path: /delete-user/{id}
           method: delete
-          integration: aws_proxy
+          integration: lambda
           request:
             parameters:
               paths:
@@ -241,3 +241,16 @@ functions:
               - Language
               - X-Requested-With
             allowCredentials: true
+
+
+resources:
+  Resources:
+    LambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName:
+          Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}
+        Action: lambda:InvokeFunction
+        Principal: apigateway.amazonaws.com
+        SourceArn:
+          Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:693utogn2j/*/*/*
