@@ -1,8 +1,6 @@
 service: poc-serverless-typescript
 
 plugins:
-#  - serverless-offline
-#  - serverless login
   - serverless-esbuild
 
 provider:
@@ -11,7 +9,6 @@ provider:
   timeout: 30
   region: eu-west-1
   versionFunctions: true
-  alias: blue
   environment:
     NODE_ENV: development
   apiGateway:
@@ -20,11 +17,16 @@ provider:
 
 functions:
   api:
+    name: blue-green-api
     handler: handler.handler
     events:
       - http:
-          path: /blue/get-all-users
+          path: /get-all-users
           method: get
+          integration: lambda
+          request:
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -38,8 +40,12 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/get-tasks-by-username
+          path: /get-tasks-by-username
           method: post
+          integration: lambda
+          request:
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -53,8 +59,12 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/add-user
+          path: /add-user
           method: post
+          integration: lambda
+          request:
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -68,8 +78,12 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/add-task
+          path: /add-task
           method: post
+          integration: lambda
+          request:
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -83,8 +97,12 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/get-single-task
+          path: /get-single-task
           method: post
+          integration: lambda
+          request:
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -98,8 +116,12 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/get-single-user
+          path: /get-single-user
           method: post
+          integration: lambda
+          request:
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -113,8 +135,12 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/get-all-tasks
+          path: /get-all-tasks
           method: get
+          integration: lambda
+          request:
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -128,12 +154,15 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/update-user/{id}
+          path: /update-user/{id}
           method: put
+          integration: lambda
           request:
             parameters:
               paths:
                 id: true
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -147,12 +176,15 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/update-task/{id}
+          path: /update-task/{id}
           method: put
+          integration: lambda
           request:
             parameters:
               paths:
                 id: true
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -166,12 +198,15 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/delete-task/{id}
+          path: /delete-task/{id}
           method: delete
+          integration: lambda
           request:
             parameters:
               paths:
                 id: true
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -185,12 +220,15 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /blue/delete-user/{id}
+          path: /delete-user/{id}
           method: delete
+          integration: lambda
           request:
             parameters:
               paths:
                 id: true
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -203,4 +241,3 @@ functions:
               - Language
               - X-Requested-With
             allowCredentials: true
-          
