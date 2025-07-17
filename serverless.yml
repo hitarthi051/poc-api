@@ -4,14 +4,13 @@ plugins:
 #  - serverless-offline
 #  - serverless login
   - serverless-esbuild
-
+  - serverless-aws-alias
 provider:
   name: aws
   runtime: nodejs20.x
   timeout: 30
   region: eu-west-1
   versionFunctions: true
-  stage: green
   environment:
     NODE_ENV: development
   apiGateway:
