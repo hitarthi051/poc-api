@@ -52,8 +52,6 @@ functions:
               - Language
               - X-Requested-With
             allowCredentials: true
-        restApiId: 28ivb3d4wd
-        restApiRootResourceId: /g6rv8zq0uc
       - http:
           path: /add-user
           method: post
