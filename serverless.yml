@@ -238,28 +238,28 @@ functions:
               - Language
               - X-Requested-With
             allowCredentials: true
-      - http:
-          path: /delete-user/{id}
-          method: delete
-          integration: lambda
-          request:
-            parameters:
-              paths:
-                id: true
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
+      # - http:
+      #     path: /delete-user/{id}
+      #     method: delete
+      #     integration: lambda
+      #     request:
+      #       parameters:
+      #         paths:
+      #           id: true
+      #       uri:
+      #         Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
+      #     cors:
+      #       origin: "*"
+      #       headers:
+      #         - Content-Type
+      #         - X-Amz-Date
+      #         - Authorization
+      #         - X-Api-Key
+      #         - X-Amz-Security-Token
+      #         - X-Amz-User-Agent
+      #         - Language
+      #         - X-Requested-With
+      #       allowCredentials: true
 
 
 resources:
