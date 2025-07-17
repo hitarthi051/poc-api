@@ -45,7 +45,7 @@ functions:
           integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -64,7 +64,7 @@ functions:
           integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -83,7 +83,7 @@ functions:
           integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -102,7 +102,7 @@ functions:
           integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -121,7 +121,7 @@ functions:
           integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -140,7 +140,7 @@ functions:
           integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -162,7 +162,7 @@ functions:
               paths:
                 id: true
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -184,7 +184,7 @@ functions:
               paths:
                 id: true
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -200,13 +200,13 @@ functions:
       - http:
           path: /delete-task/{id}
           method: delete
-          integration: aws_proxy 
+          integration: aws_proxy
           request:
             parameters:
               paths:
                 id: true
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -228,7 +228,7 @@ functions:
               paths:
                 id: true
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
