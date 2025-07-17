@@ -245,11 +245,21 @@ functions:
 
 resources:
   Resources:
-    LambdaInvokePermission:
+    BlueLambdaInvokePermission:
       Type: AWS::Lambda::Permission
       Properties:
         FunctionName:
-          Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}
+          Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:blue
+        Action: lambda:InvokeFunction
+        Principal: apigateway.amazonaws.com
+        SourceArn:
+          Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:693utogn2j/*/*/*
+
+    GreenLambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName:
+          Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:green
         Action: lambda:InvokeFunction
         Principal: apigateway.amazonaws.com
         SourceArn:
