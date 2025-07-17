@@ -24,9 +24,6 @@ functions:
           path: /get-all-users
           method: get
           integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -43,9 +40,6 @@ functions:
           path: /get-tasks-by-username
           method: post
           integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -62,9 +56,6 @@ functions:
           path: /add-user
           method: post
           integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -81,9 +72,6 @@ functions:
           path: /green
           method: post
           integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -100,9 +88,6 @@ functions:
           path: /add-task
           method: post
           integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -119,9 +104,6 @@ functions:
           path: /get-single-task
           method: post
           integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -138,9 +120,6 @@ functions:
           path: /get-single-user
           method: post
           integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -157,9 +136,6 @@ functions:
           path: /get-all-tasks
           method: get
           integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -180,8 +156,6 @@ functions:
             parameters:
               paths:
                 id: true
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -202,8 +176,6 @@ functions:
             parameters:
               paths:
                 id: true
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -224,8 +196,6 @@ functions:
             parameters:
               paths:
                 id: true
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -238,28 +208,26 @@ functions:
               - Language
               - X-Requested-With
             allowCredentials: true
-      # - http:
-      #     path: /delete-user/{id}
-      #     method: delete
-      #     integration: lambda
-      #     request:
-      #       parameters:
-      #         paths:
-      #           id: true
-      #       uri:
-      #         Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-      #     cors:
-      #       origin: "*"
-      #       headers:
-      #         - Content-Type
-      #         - X-Amz-Date
-      #         - Authorization
-      #         - X-Api-Key
-      #         - X-Amz-Security-Token
-      #         - X-Amz-User-Agent
-      #         - Language
-      #         - X-Requested-With
-      #       allowCredentials: true
+      - http:
+          path: /delete-user/{id}
+          method: delete
+          integration: lambda
+          request:
+            parameters:
+              paths:
+                id: true
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
 
 
 resources:
