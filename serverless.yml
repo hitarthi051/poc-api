@@ -78,6 +78,25 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
+          path: /green
+          method: post
+          integration: lambda
+          request:
+            uri:
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
           path: /add-task
           method: post
           integration: lambda
@@ -265,15 +284,15 @@ resources:
         SourceArn:
           Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:693utogn2j/*/*/*
 
-    MyCustomMethod:
-      Type: AWS::ApiGateway::Method
-      Properties:
-        HttpMethod: GET
-        ResourceId: hoxnr8or62
-        RestApiId: 693utogn2j
-        AuthorizationType: NONE
-        Integration:
-          IntegrationHttpMethod: POST
-          Type: AWS_PROXY
-          Uri:
-            Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-grenn-api:${stageVariables.lambdaAlias}/invocations
+    # MyCustomMethod:
+    #   Type: AWS::ApiGateway::Method
+    #   Properties:
+    #     HttpMethod: GET
+    #     ResourceId: hoxnr8or62
+    #     RestApiId: 693utogn2j
+    #     AuthorizationType: NONE
+    #     Integration:
+    #       IntegrationHttpMethod: POST
+    #       Type: AWS_PROXY
+    #       Uri:
+    #         Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-grenn-api:${stageVariables.lambdaAlias}/invocations

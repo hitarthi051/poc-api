@@ -94,6 +94,21 @@ router.post("/add-user", async (req: Request, res: Response) => {
     });
   }
 });
+router.post("/green", async (req: Request, res: Response) => {
+  try {
+    console.log("newere version called");
+    res.status(200).json({
+      message: "newer version.",
+    }
+    );
+  } catch (error: any) {
+    console.error("Error in /add-user route:", error);
+    res.status(500).json({
+      message: "An unexpected error occurred.",
+      error: error.message,
+    });
+  }
+});
 
 router.post("/add-task", async (req: Request, res: Response) => {
   try {
