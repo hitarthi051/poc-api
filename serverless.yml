@@ -4,7 +4,7 @@ plugins:
 #  - serverless-offline
 #  - serverless login
   - serverless-esbuild
-  - serverless-aws-alias
+
 provider:
   name: aws
   runtime: nodejs20.x
@@ -23,7 +23,7 @@ functions:
     handler: handler.handler
     events:
       - http:
-          path: /get-all-users
+          path: /blue/get-all-users
           method: get
           cors:
             origin: "*"
@@ -38,7 +38,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /get-tasks-by-username
+          path: /blue/get-tasks-by-username
           method: post
           cors:
             origin: "*"
@@ -53,7 +53,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /add-user
+          path: /blue/add-user
           method: post
           cors:
             origin: "*"
@@ -68,7 +68,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /add-task
+          path: /blue/add-task
           method: post
           cors:
             origin: "*"
@@ -83,7 +83,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /get-single-task
+          path: /blue/get-single-task
           method: post
           cors:
             origin: "*"
@@ -98,7 +98,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /get-single-user
+          path: /blue/get-single-user
           method: post
           cors:
             origin: "*"
@@ -113,7 +113,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /get-all-tasks
+          path: /blue/get-all-tasks
           method: get
           cors:
             origin: "*"
@@ -128,7 +128,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /update-user/{id}
+          path: /blue/update-user/{id}
           method: put
           request:
             parameters:
@@ -147,7 +147,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /update-task/{id}
+          path: /blue/update-task/{id}
           method: put
           request:
             parameters:
@@ -166,7 +166,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /delete-task/{id}
+          path: /blue/delete-task/{id}
           method: delete
           request:
             parameters:
@@ -185,7 +185,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /delete-user/{id}
+          path: /blue/delete-user/{id}
           method: delete
           request:
             parameters:
