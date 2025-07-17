@@ -37,8 +37,6 @@ functions:
               - Language
               - X-Requested-With
             allowCredentials: true
-          restApiId: 693utogn2j
-          restApiRootResourceId: hoxnr8or62
       - http:
           path: /get-tasks-by-username
           method: post
