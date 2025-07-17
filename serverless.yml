@@ -23,7 +23,7 @@ functions:
       - http:
           path: /get-all-users
           method: get
-          integration: lambda
+          integration: aws_proxy
           request:
             uri:
               Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
@@ -42,10 +42,10 @@ functions:
       - http:
           path: /get-tasks-by-username
           method: post
-          integration: lambda
+          integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -61,10 +61,10 @@ functions:
       - http:
           path: /add-user
           method: post
-          integration: lambda
+          integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -80,10 +80,10 @@ functions:
       - http:
           path: /add-task
           method: post
-          integration: lambda
+          integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -99,10 +99,10 @@ functions:
       - http:
           path: /get-single-task
           method: post
-          integration: lambda
+          integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -118,10 +118,10 @@ functions:
       - http:
           path: /get-single-user
           method: post
-          integration: lambda
+          integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -137,10 +137,10 @@ functions:
       - http:
           path: /get-all-tasks
           method: get
-          integration: lambda
+          integration: aws_proxy
           request:
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -156,13 +156,13 @@ functions:
       - http:
           path: /update-user/{id}
           method: put
-          integration: lambda
+          integration: aws_proxy
           request:
             parameters:
               paths:
                 id: true
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -178,13 +178,13 @@ functions:
       - http:
           path: /update-task/{id}
           method: put
-          integration: lambda
+          integration: aws_proxy
           request:
             parameters:
               paths:
                 id: true
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -200,13 +200,13 @@ functions:
       - http:
           path: /delete-task/{id}
           method: delete
-          integration: lambda
+          integration: aws_proxy
           request:
             parameters:
               paths:
                 id: true
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
@@ -222,13 +222,13 @@ functions:
       - http:
           path: /delete-user/{id}
           method: delete
-          integration: lambda
+          integration: aws_proxy
           request:
             parameters:
               paths:
                 id: true
             uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-api:${stageVariables.lambdaAlias}/invocations
+              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           cors:
             origin: "*"
             headers:
