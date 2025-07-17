@@ -23,7 +23,6 @@ functions:
       - http:
           path: /get-all-users
           method: get
-          integration: lambda
           cors:
             origin: "*"
             headers:
@@ -39,7 +38,6 @@ functions:
       - http:
           path: /get-tasks-by-username
           method: post
-          integration: lambda
           cors:
             origin: "*"
             headers:
@@ -55,7 +53,6 @@ functions:
       - http:
           path: /add-user
           method: post
-          integration: lambda
           cors:
             origin: "*"
             headers:
@@ -71,7 +68,6 @@ functions:
       - http:
           path: /green
           method: post
-          integration: lambda
           cors:
             origin: "*"
             headers:
@@ -87,7 +83,6 @@ functions:
       - http:
           path: /add-task
           method: post
-          integration: lambda
           cors:
             origin: "*"
             headers:
@@ -103,7 +98,6 @@ functions:
       - http:
           path: /get-single-task
           method: post
-          integration: lambda
           cors:
             origin: "*"
             headers:
@@ -119,7 +113,6 @@ functions:
       - http:
           path: /get-single-user
           method: post
-          integration: lambda
           cors:
             origin: "*"
             headers:
@@ -135,7 +128,6 @@ functions:
       - http:
           path: /get-all-tasks
           method: get
-          integration: lambda
           cors:
             origin: "*"
             headers:
@@ -151,7 +143,6 @@ functions:
       - http:
           path: /update-user/{id}
           method: put
-          integration: lambda
           request:
             parameters:
               paths:
@@ -171,7 +162,6 @@ functions:
       - http:
           path: /update-task/{id}
           method: put
-          integration: lambda
           request:
             parameters:
               paths:
@@ -191,7 +181,6 @@ functions:
       - http:
           path: /delete-task/{id}
           method: delete
-          integration: lambda
           request:
             parameters:
               paths:
@@ -211,7 +200,6 @@ functions:
       - http:
           path: /delete-user/{id}
           method: delete
-          integration: lambda
           request:
             parameters:
               paths:
