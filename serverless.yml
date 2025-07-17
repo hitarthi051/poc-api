@@ -252,3 +252,21 @@ resources:
     #       Type: AWS_PROXY
     #       Uri:
     #         Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-grenn-api:${stageVariables.lambdaAlias}/invocations
+ 
+    ApiGatewayMethodGetRoot: 
+      Type: AWS::ApiGateway::Method
+      Properties:
+        RestApiId: 693utogn2j
+        ResourceId: co2ihe 
+        HttpMethod: GET
+        AuthorizationType: NONE
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST
+          Uri: !Sub
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - stageVariablesAlias: "$${stageVariables.lambdaAlias}"
+          RequestParameters: {}
+          PassthroughBehavior: WHEN_NO_MATCH
+          TimeoutInMillis: 29000
+          ContentHandling: CONVERT_TO_TEXT
