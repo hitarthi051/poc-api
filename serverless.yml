@@ -23,7 +23,7 @@ functions:
     handler: handler.handler
     events:
       - http:
-          path: /get-all-users
+          path: /green/get-all-users
           method: get
           cors:
             origin: "*"
@@ -38,7 +38,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /get-tasks-by-username
+          path: /green/get-tasks-by-username
           method: post
           cors:
             origin: "*"
@@ -53,7 +53,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /add-user
+          path: /green/add-user
           method: post
           cors:
             origin: "*"
@@ -68,7 +68,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /add-task
+          path: /green/add-task
           method: post
           cors:
             origin: "*"
@@ -83,7 +83,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /get-single-task
+          path: /green/get-single-task
           method: post
           cors:
             origin: "*"
@@ -98,7 +98,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /get-single-user
+          path: /green/get-single-user
           method: post
           cors:
             origin: "*"
@@ -113,7 +113,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /get-all-tasks
+          path: /green/get-all-tasks
           method: get
           cors:
             origin: "*"
@@ -128,7 +128,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /update-user/{id}
+          path: /green/update-user/{id}
           method: put
           request:
             parameters:
@@ -147,7 +147,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /update-task/{id}
+          path: /green/update-task/{id}
           method: put
           request:
             parameters:
@@ -166,7 +166,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /delete-task/{id}
+          path: /green/delete-task/{id}
           method: delete
           request:
             parameters:
@@ -185,7 +185,7 @@ functions:
               - X-Requested-With
             allowCredentials: true
       - http:
-          path: /delete-user/{id}
+          path: /green/delete-user/{id}
           method: delete
           request:
             parameters:
