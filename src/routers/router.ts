@@ -66,7 +66,7 @@ router.get(
       res.status(result.statusCode).json({
         message:
           result.statusCode === 200
-            ? "Tasks fetched successfully"
+            ? "Tasks fetched successfully (green)"
             : result.body,
         data: result.statusCode === 200 ? result.body : undefined,
         error: result.statusCode !== 200 ? result.body : undefined,
@@ -86,21 +86,6 @@ router.post("/add-user", async (req: Request, res: Response) => {
     console.log("add-user from app.ts called");
     const result = await addUser(req);
     res.status(result.statusCode).json(JSON.parse(result.body));
-  } catch (error: any) {
-    console.error("Error in /add-user route:", error);
-    res.status(500).json({
-      message: "An unexpected error occurred.",
-      error: error.message,
-    });
-  }
-});
-router.post("/green", async (req: Request, res: Response) => {
-  try {
-    console.log("newere version called");
-    res.status(200).json({
-      message: "newer version.",
-    }
-    );
   } catch (error: any) {
     console.error("Error in /add-user route:", error);
     res.status(500).json({
