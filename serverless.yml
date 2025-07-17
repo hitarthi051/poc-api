@@ -11,7 +11,7 @@ provider:
   timeout: 30
   region: eu-west-1
   versionFunctions: true
-  stage: green
+  alias: green
   environment:
     NODE_ENV: development
   apiGateway:
