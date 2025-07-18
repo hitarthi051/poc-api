@@ -2,6 +2,7 @@ service: poc-serverless-typescript
 
 plugins:
   - serverless-esbuild
+  - serverless-plugin-canary-deployments
 
 provider:
   name: aws
@@ -24,7 +25,9 @@ functions:
   api:
     name: blue-green-api
     handler: handler.handler
-    alias: ${opt:stage, 'dev'}
+    deploymentSettings:
+      type: AllAtOnce
+      alias: ${opt:stage, 'green'}
 resources:
   Resources:
     ApiResourceGetUser:
@@ -33,7 +36,6 @@ resources:
         RestApiId: ${self:provider.apiGateway.restApiId}
         ParentId: ${self:provider.apiGateway.restApiRootResourceId}
         PathPart: get-all-users
-
 
     ApiMethodGetUser:
       Type: AWS::ApiGateway::Method
@@ -60,7 +62,6 @@ resources:
               method.response.header.Access-Control-Allow-Origin: true
               method.response.header.Access-Control-Allow-Headers: true
               method.response.header.Access-Control-Allow-Credentials: true
-
 
     ApiOptionsGetUser:
       Type: AWS::ApiGateway::Method
