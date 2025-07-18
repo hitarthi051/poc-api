@@ -24,7 +24,7 @@ functions:
   api:
     name: blue-green-api
     handler: handler.handler
-
+    alias: ${opt:stage, 'dev'}
 resources:
   Resources:
     ApiResourceGetUser:
