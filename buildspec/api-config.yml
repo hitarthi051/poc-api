@@ -9,6 +9,6 @@ phases:
   build:
     commands:
       - echo "Building the application"
-      - serverless deploy --region eu-west-1 --stage green --force
+      - serverless deploy --region eu-west-1 --stage ${STAGE} --force
       # - aws lambda update-alias --function-name blue-green-api --name green --function-version $(aws lambda publish-version --function-name blue-green-api --query 'Version' --output text)
 
