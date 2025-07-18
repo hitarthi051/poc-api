@@ -48,18 +48,19 @@ resources:
           Uri: !Sub
             - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "${stageVariables.lambdaAlias}"
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Credentials: "'true'"
         MethodResponses:
           - StatusCode: 200
             ResponseParameters:
               method.response.header.Access-Control-Allow-Origin: true
               method.response.header.Access-Control-Allow-Headers: true
               method.response.header.Access-Control-Allow-Credentials: true
-        IntegrationResponses:
-          - StatusCode: 200
-            ResponseParameters:
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
-              method.response.header.Access-Control-Allow-Credentials: "'true'"
+
 
     ApiOptionsGetUser:
       Type: AWS::ApiGateway::Method
