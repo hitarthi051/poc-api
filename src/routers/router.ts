@@ -28,7 +28,7 @@ router.get("/get-all-users", async (req: Request, res: Response) => {
 
     res.status(result.statusCode).json({
       message:
-        result.statusCode === 200 ? "Users fetched successfully" : result.body,
+        result.statusCode === 200 ? "Users fetched successfully not neww" : result.body,
       data: result.statusCode === 200 ? result.body : undefined,
       error: result.statusCode !== 200 ? result.body : undefined,
     });
