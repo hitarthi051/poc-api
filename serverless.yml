@@ -125,21 +125,21 @@ functions:
               - Language
               - X-Requested-With
             allowCredentials: true
-      - http:
-          path: /get-all-tasks
-          method: post
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
+      # - http:
+      #     path: /get-all-tasks
+      #     method: get
+      #     cors:
+      #       origin: "*"
+      #       headers:
+      #         - Content-Type
+      #         - X-Amz-Date
+      #         - Authorization
+      #         - X-Api-Key
+      #         - X-Amz-Security-Token
+      #         - X-Amz-User-Agent
+      #         - Language
+      #         - X-Requested-With
+      #       allowCredentials: true
       - http:
           path: /update-user/{id}
           method: put
