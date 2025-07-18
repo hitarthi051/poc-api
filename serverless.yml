@@ -257,7 +257,7 @@ resources:
       Type: AWS::ApiGateway::Method
       Properties:
         RestApiId: 693utogn2j
-        ResourceId: co2ihe 
+        ResourceId: hoxnr8or62 
         HttpMethod: GET
         AuthorizationType: NONE
         Integration:
