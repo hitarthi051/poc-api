@@ -1,0 +1,272 @@
+service: poc-serverless-typescript
+
+plugins:
+  - serverless-esbuild
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  timeout: 30
+  region: eu-west-1
+  versionFunctions: true
+  environment:
+    NODE_ENV: development
+  apiGateway:
+    restApiId: 693utogn2j
+    restApiRootResourceId: hoxnr8or62
+
+functions:
+  api:
+    name: blue-green-api
+    handler: handler.handler
+    events:
+      - http:
+          path: /get-all-users
+          method: get
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
+          path: /get-tasks-by-username
+          method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
+          path: /add-user
+          method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
+          path: /green
+          method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
+          path: /add-task
+          method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
+          path: /get-single-task
+          method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
+          path: /get-single-user
+          method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      # - http:
+      #     path: /get-all-tasks
+      #     method: get
+      #     cors:
+      #       origin: "*"
+      #       headers:
+      #         - Content-Type
+      #         - X-Amz-Date
+      #         - Authorization
+      #         - X-Api-Key
+      #         - X-Amz-Security-Token
+      #         - X-Amz-User-Agent
+      #         - Language
+      #         - X-Requested-With
+      #       allowCredentials: true
+      - http:
+          path: /update-user/{id}
+          method: put
+          request:
+            parameters:
+              paths:
+                id: true
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
+          path: /update-task/{id}
+          method: put
+          request:
+            parameters:
+              paths:
+                id: true
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
+          path: /delete-task/{id}
+          method: delete
+          request:
+            parameters:
+              paths:
+                id: true
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+      - http:
+          path: /delete-user/{id}
+          method: delete
+          request:
+            parameters:
+              paths:
+                id: true
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Language
+              - X-Requested-With
+            allowCredentials: true
+
+
+resources:
+  Resources:
+    BlueLambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName:
+          Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:blue
+        Action: lambda:InvokeFunction
+        Principal: apigateway.amazonaws.com
+        SourceArn:
+          Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:693utogn2j/*/*/*
+
+    GreenLambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName:
+          Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:green
+        Action: lambda:InvokeFunction
+        Principal: apigateway.amazonaws.com
+        SourceArn:
+          Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:693utogn2j/*/*/*
+
+    # MyCustomMethod:
+    #   Type: AWS::ApiGateway::Method
+    #   Properties:
+    #     HttpMethod: GET
+    #     ResourceId: hoxnr8or62
+    #     RestApiId: 693utogn2j
+    #     AuthorizationType: NONE
+    #     Integration:
+    #       IntegrationHttpMethod: POST
+    #       Type: AWS_PROXY
+    #       Uri:
+    #         Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-grenn-api:${stageVariables.lambdaAlias}/invocations
+ 
+    ApiGatewayMethodGetRoot: 
+      Type: AWS::ApiGateway::Method
+      Properties:
+        RestApiId: 693utogn2j
+        ResourceId: hoxnr8or62 
+        HttpMethod: GET
+        AuthorizationType: NONE
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST
+          Uri: !Sub
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - stageVariablesAlias: "${stageVariables.lambdaAlias}"
+          RequestParameters: {}
+          PassthroughBehavior: WHEN_NO_MATCH
+          TimeoutInMillis: 29000
+          ContentHandling: CONVERT_TO_TEXT
