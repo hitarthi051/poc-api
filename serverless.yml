@@ -127,7 +127,7 @@ functions:
             allowCredentials: true
       - http:
           path: /get-all-tasks
-          method: get
+          method: post
           cors:
             origin: "*"
             headers:
