@@ -30,16 +30,16 @@ resources:
     ApiResourceGetUser:
       Type: AWS::ApiGateway::Resource
       Properties:
-        RestApiId: ${param:ApiId}
-        ParentId: ${param:RootResourceId}
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ParentId: ${self:provider.apiGateway.restApiRootResourceId}
         PathPart: get-all-users
 
 
     ApiMethodGetUser:
       Type: AWS::ApiGateway::Method
       Properties:
-        RestApiId: ${param:ApiId}
-        ResourceId: ${param:RootResourceId}
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ResourceId: ${self:provider.apiGateway.restApiRootResourceId}
         HttpMethod: GET
         AuthorizationType: NONE
         Integration:
@@ -64,8 +64,8 @@ resources:
     ApiOptionsGetUser:
       Type: AWS::ApiGateway::Method
       Properties:
-        RestApiId: ${param:ApiId}
-        ResourceId: ${param:RootResourceId}
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ResourceId: ${self:provider.apiGateway.restApiRootResourceId}
         HttpMethod: OPTIONS
         AuthorizationType: NONE
         Integration:
