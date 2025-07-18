@@ -263,9 +263,8 @@ resources:
         Integration:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
-          Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
-            - stageVariablesAlias: "${stageVariables.lambdaAlias}"
+          Uri: !Sub >
+            arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
           RequestParameters: {}
           PassthroughBehavior: WHEN_NO_MATCH
           TimeoutInMillis: 29000
