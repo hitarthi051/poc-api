@@ -9,4 +9,4 @@ phases:
   build:
     commands:
       - echo "Building the application"
-      - serverless deploy --region eu-west-1 --stage green
+      - serverless deploy --region eu-west-1 --stage green --force
