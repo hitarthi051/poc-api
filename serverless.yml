@@ -101,7 +101,7 @@ resources:
         Action: lambda:InvokeFunction
         FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:blue"
         Principal: apigateway.amazonaws.com
-        SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/*/*   
+        SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${self:provider.apiGateway.restApiId}/*/*/*
 
     AdminAuthorizerPermissionGreen:
       Type: AWS::Lambda::Permission
@@ -109,4 +109,4 @@ resources:
         Action: lambda:InvokeFunction
         FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:green"
         Principal: apigateway.amazonaws.com
-        SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/*/*   
+        SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${self:provider.apiGateway.restApiId}/*/*/*
