@@ -3,7 +3,7 @@ service: poc-serverless-typescript
 plugins:
   - serverless-esbuild
   - serverless-plugin-canary-deployments
-
+  - serverless-plugin-lambda-alias
 provider:
   name: aws
   runtime: nodejs20.x
