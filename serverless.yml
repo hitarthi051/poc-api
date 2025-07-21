@@ -28,7 +28,7 @@ functions:
     handler: handler.handler
     deploymentSettings:
       type: AllAtOnce
-      alias: ${opt:alias, 'dev'}
+      alias: ${param:alias}
     events:
       - http:
           path: dummy-trigger
