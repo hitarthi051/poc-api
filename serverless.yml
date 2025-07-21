@@ -10,24 +10,29 @@ provider:
   timeout: 30
   region: eu-west-1
   versionFunctions: true
+  stackName: poc-serverless-typescript
   environment:
     NODE_ENV: development
   apiGateway:
     restApiId: 693utogn2j
     restApiRootResourceId: hoxnr8or62
 
-params:
-  dev:
-    ApiId: 693utogn2j
-    RootResourceId: hoxnr8or62
+# params:
+#   dev:
+#     ApiId: 693utogn2j
+#     RootResourceId: hoxnr8or62
 
 functions:
   api:
     name: blue-green-api
     handler: handler.handler
     deploymentSettings:
-      type: Linear10PercentEvery1Minute
-      alias: ${opt:stage, 'green'}
+      type: AllAtOnce
+      alias: ${opt:alias, 'dev'}
+    events:
+      - http:
+          path: dummy-trigger
+          method: get
 resources:
   Resources:
     ApiResourceGetUser:
@@ -88,3 +93,20 @@ resources:
               method.response.header.Access-Control-Allow-Methods: true
               method.response.header.Access-Control-Allow-Origin: true
               method.response.header.Access-Control-Allow-Credentials: true
+
+
+  AdminAuthorizerPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:blue"
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/*/*   
+
+  AdminAuthorizerPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:green"
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/*/*   
