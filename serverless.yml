@@ -2,6 +2,7 @@ service: poc-serverless-typescript
 
 plugins:
   - serverless-esbuild
+  - serverless-plugin-canary-deployments
 
 provider:
   name: aws
@@ -9,248 +10,103 @@ provider:
   timeout: 30
   region: eu-west-1
   versionFunctions: true
+  stackName: poc-serverless-typescript
   environment:
     NODE_ENV: development
   apiGateway:
     restApiId: 693utogn2j
     restApiRootResourceId: hoxnr8or62
 
+# params:
+#   dev:
+#     ApiId: 693utogn2j
+#     RootResourceId: hoxnr8or62
+
 functions:
   api:
     name: blue-green-api
     handler: handler.handler
+    deploymentSettings:
+      type: AllAtOnce
+      alias: ${param:alias}
     events:
       - http:
-          path: /get-all-users
+          path: dummy-trigger
           method: get
-          integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /get-tasks-by-username
-          method: post
-          integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /add-user
-          method: post
-          integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /add-task
-          method: post
-          integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /get-single-task
-          method: post
-          integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /get-single-user
-          method: post
-          integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /get-all-tasks
-          method: get
-          integration: lambda
-          request:
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /update-user/{id}
-          method: put
-          integration: lambda
-          request:
-            parameters:
-              paths:
-                id: true
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /update-task/{id}
-          method: put
-          integration: lambda
-          request:
-            parameters:
-              paths:
-                id: true
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /delete-task/{id}
-          method: delete
-          integration: lambda
-          request:
-            parameters:
-              paths:
-                id: true
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-      - http:
-          path: /delete-user/{id}
-          method: delete
-          integration: lambda
-          request:
-            parameters:
-              paths:
-                id: true
-            uri:
-              Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}/invocations
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Language
-              - X-Requested-With
-            allowCredentials: true
-
-
 resources:
   Resources:
-    LambdaInvokePermission:
-      Type: AWS::Lambda::Permission
+    ApiResourceGetUser:
+      Type: AWS::ApiGateway::Resource
       Properties:
-        FunctionName:
-          Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariables.lambdaAlias}
-        Action: lambda:InvokeFunction
-        Principal: apigateway.amazonaws.com
-        SourceArn:
-          Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:693utogn2j/*/*/*
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ParentId: ${self:provider.apiGateway.restApiRootResourceId}
+        PathPart: get-all-users
+
+    ApiMethodGetUser:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ResourceId: !Ref ApiResourceGetUser
+        HttpMethod: GET
+        AuthorizationType: NONE
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST
+          Uri: !Sub
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - stageVariablesAlias: "${stageVariables.lambdaAlias}"
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Credentials: "'true'"
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: true
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Credentials: true
+
+    ApiOptionsGetUser:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ResourceId: !Ref ApiResourceGetUser
+        HttpMethod: OPTIONS
+        AuthorizationType: NONE
+        Integration:
+          Type: MOCK
+          RequestTemplates:
+            application/json: '{"statusCode": 200}'
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Credentials: "'true'"
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Methods: true
+              method.response.header.Access-Control-Allow-Origin: true
+              method.response.header.Access-Control-Allow-Credentials: true
+
+
+    # AdminAuthorizerPermission:
+    #   Type: AWS::Lambda::Permission
+    #   Properties:
+    #     Action: lambda:InvokeFunction
+    #     FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:blue"
+    #     Principal: apigateway.amazonaws.com
+    #     SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${self:provider.apiGateway.restApiId}/*/*/*
+
+    # AdminAuthorizerPermissionGreen:
+    #   Type: AWS::Lambda::Permission
+    #   Properties:
+    #     Action: lambda:InvokeFunction
+    #     FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:green"
+    #     Principal: apigateway.amazonaws.com
+    #     SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${self:provider.apiGateway.restApiId}/*/*/*
