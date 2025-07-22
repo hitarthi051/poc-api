@@ -28,6 +28,7 @@ functions:
     handler: handler.handler
     deploymentSettings:
       type: AllAtOnce
+      alias: green
     events:
       - http:
           path: dummy-trigger
