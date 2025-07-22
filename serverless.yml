@@ -94,7 +94,6 @@ resources:
               method.response.header.Access-Control-Allow-Origin: true
               method.response.header.Access-Control-Allow-Credentials: true
 
-
     # AdminAuthorizerPermission:
     #   Type: AWS::Lambda::Permission
     #   Properties:
