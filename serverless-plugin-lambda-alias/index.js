@@ -18,7 +18,7 @@ class ServerlessLambdaAliasPlugin {
     // Define the hooks that our plugin will use
     // We want to run our logic after the deployment is complete
     this.hooks = {
-      "after:deploy:deploy": this.manageGreenBlueAliases.bind(this), // Renamed hook to reflect new focus
+      "after:deploy:deploy": this.manageAllAliases.bind(this), // Renamed hook to reflect new focus
     };
 
     // Initialize AWS SDK v3 Lambda client with the region from the Serverless configuration
@@ -33,7 +33,7 @@ class ServerlessLambdaAliasPlugin {
   /**
    * Helper function to create or update an alias.
    * @param {string} functionName - The full name of the Lambda function.
-   * @param {string} aliasName - The name of the alias to manage (e.g., 'green').
+   * @param {string} aliasName - The name of the alias to manage (e.g., 'green', 'blue', 'prod').
    * @param {string} functionVersion - The Lambda version the alias should point to.
    * @param {string} description - The description for the alias.
    * @returns {Promise<void>}
@@ -108,11 +108,13 @@ class ServerlessLambdaAliasPlugin {
   }
 
   /**
-   * Main function to manage 'green' and 'blue' Lambda aliases.
+   * Main function to manage 'green', 'blue', and 'prod' Lambda aliases.
    * This is triggered by the 'after:deploy:deploy' hook.
    */
-  async manageGreenBlueAliases() {
-    this.serverless.cli.log("Starting Green/Blue Lambda alias management...");
+  async manageAllAliases() {
+    this.serverless.cli.log(
+      "Starting Lambda alias management (Green/Blue/Prod)..."
+    );
 
     const service = this.serverless.service;
     const functions = service.functions;
@@ -126,9 +128,8 @@ class ServerlessLambdaAliasPlugin {
         const deployedFunctionName = `${serviceName}-${stage}-${functionName}`;
 
         this.serverless.cli.log(
-          `Processing Green/Blue aliases for function: ${deployedFunctionName}`
+          `Processing aliases for function: ${deployedFunctionName}`
         );
-        // ADDED DEBUG LOGGING
         this.serverless.cli.log(
           `[DEBUG] Constructed Lambda Function Name: "${deployedFunctionName}"`,
           "ServerlessLambdaAliasPlugin",
@@ -152,7 +153,7 @@ class ServerlessLambdaAliasPlugin {
           if (numericalVersions.length === 0) {
             this.serverless.cli.log(
               `[WARNING] No numerical versions found for function "${deployedFunctionName}". ` +
-                `Skipping Green/Blue alias management for this function. A new version must be published.`,
+                `Skipping alias management for this function. A new version must be published.`,
               "ServerlessLambdaAliasPlugin",
               { color: "yellow" }
             );
@@ -160,10 +161,10 @@ class ServerlessLambdaAliasPlugin {
           }
 
           const greenVersion = String(numericalVersions[0]); // Latest version
+
+          // --- Manage Green Alias ---
           const greenAliasName = "green"; // Static green alias name
           const greenDescription = `Green alias for ${functionName} (newly deployed version) in ${stage} stage`;
-
-          // Manage the 'green' alias
           await this.manageSingleAlias(
             deployedFunctionName,
             greenAliasName,
@@ -172,9 +173,11 @@ class ServerlessLambdaAliasPlugin {
           );
 
           // --- Manage Blue Alias (if a previous version exists) ---
+          const blueAliasName = "blue"; // Static blue alias name
+          let blueVersion = null;
+
           if (numericalVersions.length > 1) {
-            const blueVersion = String(numericalVersions[1]); // Second latest version
-            const blueAliasName = "blue"; // Static blue alias name
+            blueVersion = String(numericalVersions[1]); // Second latest version
             const blueDescription = `Blue alias for ${functionName} (previous deployed version) in ${stage} stage`;
 
             // Only update blue if it's not pointing to the same version as green
@@ -187,19 +190,44 @@ class ServerlessLambdaAliasPlugin {
               );
             } else {
               this.serverless.cli.log(
-                `Blue alias "${blueAliasName}" not created/updated as current version is same as green (${greenVersion}).`
+                `Blue alias "${blueAliasName}" not created/updated as it would point to the same version as green (${greenVersion}).`
               );
             }
           } else {
             this.serverless.cli.log(
               `Only one numerical version found for "${deployedFunctionName}". Skipping 'blue' alias creation.`
             );
-            // If you want to explicitly delete the 'blue' alias if it exists and only one version is left,
-            // you'd add deletion logic here. For now, we just skip creation.
           }
+
+          // --- Manage Prod Alias ---
+          const prodAliasName = "prod"; // Static prod alias name
+          let prodTargetVersion = null;
+
+          // Prod should point to the blue version if it exists, otherwise to the green version
+          if (blueVersion) {
+            // If a distinct blue version was found and managed
+            prodTargetVersion = blueVersion;
+            this.serverless.cli.log(
+              `Prod alias "${prodAliasName}" will target blue version (${prodTargetVersion}).`
+            );
+          } else {
+            // No distinct blue version, prod targets green
+            prodTargetVersion = greenVersion;
+            this.serverless.cli.log(
+              `Prod alias "${prodAliasName}" will target green version (${prodTargetVersion}).`
+            );
+          }
+
+          const prodDescription = `Prod alias for ${functionName} in ${stage} stage`;
+          await this.manageSingleAlias(
+            deployedFunctionName,
+            prodAliasName,
+            prodTargetVersion,
+            prodDescription
+          );
         } catch (error) {
           this.serverless.cli.log(
-            `[ERROR] Failed to manage Green/Blue aliases for function "${deployedFunctionName}": ${error.message}`,
+            `[ERROR] Failed to manage aliases for function "${deployedFunctionName}": ${error.message}`,
             "ServerlessLambdaAliasPlugin",
             { color: "red" }
           );
@@ -218,17 +246,19 @@ class ServerlessLambdaAliasPlugin {
             );
           }
           this.serverless.cli.log(
-            `[DEBUG] Raw error in manageGreenBlueAliases for function "${deployedFunctionName}":`,
+            `[DEBUG] Raw error in manageAllAliases for function "${deployedFunctionName}":`,
             "ServerlessLambdaAliasPlugin",
             { color: "red" }
           );
           console.error(error);
           // You might want to throw the error to stop the deployment, or just log it.
-          // throw new this.serverless.classes.Error(`Green/Blue alias management failed: ${error.message}`);
+          // throw new this.serverless.classes.Error(`Alias management failed: ${error.message}`);
         }
       }
     }
-    this.serverless.cli.log("Green/Blue Lambda alias management completed.");
+    this.serverless.cli.log(
+      "Lambda alias management (Green/Blue/Prod) completed."
+    );
   }
 }
 
