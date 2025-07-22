@@ -28,7 +28,6 @@ functions:
     handler: handler.handler
     deploymentSettings:
       type: AllAtOnce
-      alias: live
     events:
       - http:
           path: dummy-trigger
