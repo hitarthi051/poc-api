@@ -24,7 +24,7 @@ provider:
 
 functions:
   api:
-    name: blue-green-api
+    # name: blue-green-api
     handler: handler.handler
     deploymentSettings:
       type: AllAtOnce
