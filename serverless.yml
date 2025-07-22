@@ -26,8 +26,6 @@ functions:
   api:
     # name: blue-green-api
     handler: handler.handler
-    deploymentSettings:
-      type: AllAtOnce
     events:
       - http:
           path: dummy-trigger
