@@ -3,7 +3,7 @@ service: poc-serverless-typescript
 plugins:
   - serverless-esbuild
   - serverless-plugin-canary-deployments
-
+  - serverless-plugin-lambda-alias
 provider:
   name: aws
   runtime: nodejs20.x
@@ -54,7 +54,7 @@ resources:
           IntegrationHttpMethod: POST
           Uri: !Sub
             - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
-            - stageVariablesAlias: "${stageVariables.lambdaAlias}"
+            - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
               ResponseParameters:
@@ -95,13 +95,13 @@ resources:
               method.response.header.Access-Control-Allow-Credentials: true
 
 
-    # AdminAuthorizerPermission:
-    #   Type: AWS::Lambda::Permission
-    #   Properties:
-    #     Action: lambda:InvokeFunction
-    #     FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:blue"
-    #     Principal: apigateway.amazonaws.com
-    #     SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${self:provider.apiGateway.restApiId}/*/*/*
+    AdminAuthorizerPermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        Action: lambda:InvokeFunction
+        FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:prod"
+        Principal: apigateway.amazonaws.com
+        SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${self:provider.apiGateway.restApiId}/*/*/*
 
     # AdminAuthorizerPermissionGreen:
     #   Type: AWS::Lambda::Permission
