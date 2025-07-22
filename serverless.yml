@@ -54,7 +54,7 @@ resources:
           IntegrationHttpMethod: POST
           Uri: !Sub
             - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
-            - stageVariablesAlias: "${stageVariables.lambdaAlias}"
+            - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
               ResponseParameters:
