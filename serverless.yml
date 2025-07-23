@@ -536,8 +536,8 @@ resources:
         ResourceId: !Ref DeleteTaskIdResource
         RestApiId: ${self:provider.apiGateway.restApiId}
         Integration:
-          IntegrationHttpMethod: POST
           Type: AWS_PROXY
+          IntegrationHttpMethod: POST
           Uri: !Sub
             - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
@@ -604,8 +604,8 @@ resources:
         ResourceId: !Ref UpdateTaskIdResource
         RestApiId: ${self:provider.apiGateway.restApiId}
         Integration:
-          IntegrationHttpMethod: POST
           Type: AWS_PROXY
+          IntegrationHttpMethod: POST
           Uri: !Sub
             - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
@@ -671,8 +671,8 @@ resources:
         ResourceId: !Ref UpdateUserIdResource
         RestApiId: ${self:provider.apiGateway.restApiId}
         Integration:
-          IntegrationHttpMethod: POST
           Type: AWS_PROXY
+          IntegrationHttpMethod: POST
           Uri: !Sub
             - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
