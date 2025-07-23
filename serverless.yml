@@ -91,7 +91,6 @@ resources:
               method.response.header.Access-Control-Allow-Origin: true
               method.response.header.Access-Control-Allow-Credentials: true
 
-    
     ApiResourceGetTasks:
       Type: AWS::ApiGateway::Resource
       Properties:
@@ -215,7 +214,7 @@ resources:
       Properties:
         RestApiId: ${self:provider.apiGateway.restApiId}
         ParentId: ${self:provider.apiGateway.restApiRootResourceId}
-        PathPart: get-single-task
+        PathPart: get-single-user
     
     ApiMethodGetSingleUser:
       Type: AWS::ApiGateway::Method
@@ -445,7 +444,281 @@ resources:
               method.response.header.Access-Control-Allow-Methods: true
               method.response.header.Access-Control-Allow-Origin: true
               method.response.header.Access-Control-Allow-Credentials: true
-   
+
+    DeleteUserResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ParentId: ${self:provider.apiGateway.restApiRootResourceId}
+        PathPart: delete-user
+
+    # Resource: /delete-user/{id}
+    DeleteUserIdResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ParentId: !Ref DeleteUserResource
+        PathPart: "{id}"
+
+    # Method: DELETE /delete-user/{id}
+    DeleteUserMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ResourceId: !Ref DeleteUserIdResource
+        HttpMethod: DELETE
+        AuthorizationType: NONE
+        RequestParameters:
+          method.request.path.id: true
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST
+          Uri: !Sub
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - stageVariablesAlias: "prod"
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Credentials: "'true'"
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: true
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Credentials: true
+    
+    DeleteUserOptionsMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ResourceId: !Ref DeleteUserIdResource
+        HttpMethod: OPTIONS
+        AuthorizationType: NONE
+        Integration:
+          Type: MOCK
+          RequestTemplates:
+            application/json: '{ "statusCode": 200 }'
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
+              ResponseTemplates:
+                application/json: ""
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Origin: true
+              method.response.header.Access-Control-Allow-Methods: true
+
+    DeleteTaskResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        ParentId: ${self:provider.apiGateway.restApiRootResourceId}
+        PathPart: delete-task
+
+    DeleteTaskIdResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId: !Ref DeleteTaskResource
+        PathPart: "{id}"
+        RestApiId: ${self:provider.apiGateway.restApiId}
+    DeleteTaskMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        AuthorizationType: NONE
+        HttpMethod: DELETE
+        ResourceId: !Ref DeleteTaskIdResource
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST
+          Uri: !Sub
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - stageVariablesAlias: "prod"
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Credentials: "'true'"
+        RequestParameters:
+          method.request.path.id: true
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: true
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Credentials: true
+    
+
+    DeleteTaskOptionsMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        AuthorizationType: NONE
+        HttpMethod: OPTIONS
+        ResourceId: !Ref DeleteTaskIdResource
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        Integration:
+          Type: MOCK
+          RequestTemplates:
+            application/json: '{ "statusCode": 200 }'
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+              ResponseTemplates:
+                application/json: ''
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Methods: true
+              method.response.header.Access-Control-Allow-Origin: true
+
+    UpdateTaskResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId: ${self:provider.apiGateway.restApiRootResourceId}
+        PathPart: update-task
+        RestApiId: ${self:provider.apiGateway.restApiId}
+
+    UpdateTaskIdResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId: !Ref UpdateTaskResource
+        PathPart: "{id}"
+        RestApiId: ${self:provider.apiGateway.restApiId}
+    UpdateTaskPutMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        AuthorizationType: NONE
+        HttpMethod: PUT
+        ResourceId: !Ref UpdateTaskIdResource
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST
+          Uri: !Sub
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - stageVariablesAlias: "prod"
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Credentials: "'true'"
+        RequestParameters:
+          method.request.path.id: true
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: true
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Credentials: true
+    
+
+    UpdateTaskOptionsMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        AuthorizationType: NONE
+        HttpMethod: OPTIONS
+        ResourceId: !Ref UpdateTaskIdResource
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        Integration:
+          Type: MOCK
+          RequestTemplates:
+            application/json: '{ "statusCode": 200 }'
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Methods: "'PUT,OPTIONS'"
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+              ResponseTemplates:
+                application/json: ''
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Methods: true
+              method.response.header.Access-Control-Allow-Origin: true
+    UpdateUserResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId: ${self:provider.apiGateway.restApiRootResourceId}
+        PathPart: update-user
+        RestApiId: ${self:provider.apiGateway.restApiId}
+
+    UpdateUserIdResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId: !Ref UpdateUserResource
+        PathPart: "{id}"
+        RestApiId: ${self:provider.apiGateway.restApiId}
+    UpdateUserPutMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        AuthorizationType: NONE
+        HttpMethod: PUT
+        ResourceId: !Ref UpdateUserIdResource
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST
+          Uri: !Sub
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - stageVariablesAlias: "prod"
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Credentials: "'true'"
+        RequestParameters:
+          method.request.path.id: true
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: true
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Credentials: true
+    
+
+    UpdateUserOptionsMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        AuthorizationType: NONE
+        HttpMethod: OPTIONS
+        ResourceId: !Ref UpdateUserIdResource
+        RestApiId: ${self:provider.apiGateway.restApiId}
+        Integration:
+          Type: MOCK
+          RequestTemplates:
+            application/json: '{ "statusCode": 200 }'
+          IntegrationResponses:
+            - StatusCode: 200
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
+                method.response.header.Access-Control-Allow-Methods: "'PUT,OPTIONS'"
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+              ResponseTemplates:
+                application/json: ''
+        MethodResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: true
+              method.response.header.Access-Control-Allow-Methods: true
+              method.response.header.Access-Control-Allow-Origin: true
+
+
     # AdminAuthorizerPermission:
     #   Type: AWS::Lambda::Permission
     #   Properties:
