@@ -214,7 +214,7 @@ resources:
       Properties:
         RestApiId: ${self:provider.apiGateway.restApiId}
         ParentId: ${self:provider.apiGateway.restApiRootResourceId}
-        PathPart: get-single-task
+        PathPart: get-single-user
     
     ApiMethodGetSingleUser:
       Type: AWS::ApiGateway::Method
