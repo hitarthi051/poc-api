@@ -80,7 +80,7 @@ resources:
             - StatusCode: 200
               ResponseParameters:
                 method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
-                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET'"
                 method.response.header.Access-Control-Allow-Origin: "'*'"
                 method.response.header.Access-Control-Allow-Credentials: "'true'"
         MethodResponses:
@@ -139,7 +139,7 @@ resources:
             - StatusCode: 200
               ResponseParameters:
                 method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
-                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET'"
                 method.response.header.Access-Control-Allow-Origin: "'*'"
                 method.response.header.Access-Control-Allow-Credentials: "'true'"
         MethodResponses:
@@ -198,7 +198,7 @@ resources:
             - StatusCode: 200
               ResponseParameters:
                 method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
-                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
                 method.response.header.Access-Control-Allow-Origin: "'*'"
                 method.response.header.Access-Control-Allow-Credentials: "'true'"
         MethodResponses:
@@ -257,7 +257,7 @@ resources:
             - StatusCode: 200
               ResponseParameters:
                 method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
-                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
                 method.response.header.Access-Control-Allow-Origin: "'*'"
                 method.response.header.Access-Control-Allow-Credentials: "'true'"
         MethodResponses:
@@ -316,7 +316,7 @@ resources:
             - StatusCode: 200
               ResponseParameters:
                 method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
-                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
                 method.response.header.Access-Control-Allow-Origin: "'*'"
                 method.response.header.Access-Control-Allow-Credentials: "'true'"
         MethodResponses:
@@ -375,7 +375,7 @@ resources:
             - StatusCode: 200
               ResponseParameters:
                 method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
-                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
                 method.response.header.Access-Control-Allow-Origin: "'*'"
                 method.response.header.Access-Control-Allow-Credentials: "'true'"
         MethodResponses:
@@ -434,7 +434,7 @@ resources:
             - StatusCode: 200
               ResponseParameters:
                 method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Language,X-Requested-With'"
-                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+                method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
                 method.response.header.Access-Control-Allow-Origin: "'*'"
                 method.response.header.Access-Control-Allow-Credentials: "'true'"
         MethodResponses:
