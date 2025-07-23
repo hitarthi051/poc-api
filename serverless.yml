@@ -50,7 +50,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -109,7 +109,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -168,7 +168,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -227,7 +227,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -286,7 +286,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -345,7 +345,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -404,7 +404,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -474,7 +474,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -539,7 +539,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -607,7 +607,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -674,7 +674,7 @@ resources:
           Type: AWS_PROXY
           IntegrationHttpMethod: POST
           Uri: !Sub
-            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:${stageVariablesAlias}/invocations
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:${stageVariablesAlias}/invocations
             - stageVariablesAlias: "prod"
           IntegrationResponses:
             - StatusCode: 200
@@ -723,7 +723,7 @@ resources:
     #   Type: AWS::Lambda::Permission
     #   Properties:
     #     Action: lambda:InvokeFunction
-    #     FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:prod"
+    #     FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:prod"
     #     Principal: apigateway.amazonaws.com
     #     SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${self:provider.apiGateway.restApiId}/*/*/*
 
@@ -731,6 +731,6 @@ resources:
     #   Type: AWS::Lambda::Permission
     #   Properties:
     #     Action: lambda:InvokeFunction
-    #     FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:blue-green-api:green"
+    #     FunctionName: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:poc-serverless-typescript-dev-api:green"
     #     Principal: apigateway.amazonaws.com
     #     SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${self:provider.apiGateway.restApiId}/*/*/*
