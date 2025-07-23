@@ -520,7 +520,7 @@ resources:
       Type: AWS::ApiGateway::Resource
       Properties:
         RestApiId: ${self:provider.apiGateway.restApiId}
-        ParentId: ${self:provider.apiGateway.restApiId}
+        ParentId: ${self:provider.apiGateway.restApiRootResourceId}
         PathPart: delete-task
 
     DeleteTaskIdResource:
