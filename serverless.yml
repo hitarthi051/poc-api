@@ -449,14 +449,14 @@ resources:
       Type: AWS::ApiGateway::Resource
       Properties:
         RestApiId: ${self:provider.apiGateway.restApiId}
-        ParentId: ${self:provider.apiGateway.restApiId}
+        ParentId: ${self:provider.apiGateway.restApiRootResourceId}
         PathPart: delete-user
 
     # Resource: /delete-user/{id}
     DeleteUserIdResource:
       Type: AWS::ApiGateway::Resource
       Properties:
-        RestApiId: !Ref ${self:provider.apiGateway.restApiId}
+        RestApiId: ${self:provider.apiGateway.restApiId}
         ParentId: !Ref DeleteUserResource
         PathPart: "{id}"
 
@@ -464,7 +464,7 @@ resources:
     DeleteUserMethod:
       Type: AWS::ApiGateway::Method
       Properties:
-        RestApiId: !Ref ${self:provider.apiGateway.restApiId}
+        RestApiId: ${self:provider.apiGateway.restApiId}
         ResourceId: !Ref DeleteUserIdResource
         HttpMethod: DELETE
         AuthorizationType: NONE
@@ -488,7 +488,7 @@ resources:
     DeleteUserOptionsMethod:
       Type: AWS::ApiGateway::Method
       Properties:
-        RestApiId: !Ref ${self:provider.apiGateway.restApiId}
+        RestApiId: ${self:provider.apiGateway.restApiId}
         ResourceId: !Ref DeleteUserIdResource
         HttpMethod: OPTIONS
         AuthorizationType: NONE
